@@ -43,6 +43,16 @@ on:
         required: false
         type: boolean
         default: false
+      multi-window:
+        description: "Allow open multiple windows of one instance"
+        required: false
+        type: boolean
+        default: false
+      multi-instance:
+        description: "Allow open multiple instances"
+        required: false
+        type: boolean
+        default: false
       multi_arch:
         description: "Universal binary (macOS only)"
         required: false
@@ -156,6 +166,14 @@ jobs:
 
           if ("${{ inputs.hide_title_bar }}" -eq "true") {
             $args += "--hide-title-bar"
+          }
+          
+          if ("${{ inputs.multi-window }}" -eq "true") {
+            $args += "--multi-window"
+          }
+          
+          if ("${{ inputs.multi-instance }}" -eq "true") {
+            $args += "--multi-instance"
           }
 
           Write-Host "Running: node dist/cli.js $($args -join ' ')"
