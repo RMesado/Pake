@@ -53,6 +53,10 @@ on:
         required: false
         type: boolean
         default: false
+      user-agent:
+        description: "Change user agent"
+        required: false
+        default: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
       multi_arch:
         description: "Universal binary (macOS only)"
         required: false
@@ -174,6 +178,11 @@ jobs:
           
           if ("${{ inputs.multi-instance }}" -eq "true") {
             $args += "--multi-instance"
+          }
+
+          
+          if ("${{ inputs.user-agent}}" -eq "true") {
+            $args += "--user-agent"
           }
 
           Write-Host "Running: node dist/cli.js $($args -join ' ')"
