@@ -53,10 +53,11 @@ on:
         required: false
         type: boolean
         default: false
-      user-agent:
-        description: "Change user agent"
+      debug:
+        description: "Enable devtools"
         required: false
-        default: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        type: boolean
+        default: false
       multi_arch:
         description: "Universal binary (macOS only)"
         required: false
@@ -181,8 +182,8 @@ jobs:
           }
 
           
-          if ("${{ inputs.user-agent}}" -eq "true") {
-            $args += "--user-agent"
+          if ("${{ inputs.debug}}" -eq "true") {
+            $args += "--debug"
           }
 
           Write-Host "Running: node dist/cli.js $($args -join ' ')"
